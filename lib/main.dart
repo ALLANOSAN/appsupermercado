@@ -22,25 +22,27 @@ class MyApp extends StatelessWidget {
         theme: ThemeData(
           primarySwatch: Colors.blue,
         ),
-        home: MainPage(),
+        home: const MainPage(),
       ),
     );
   }
 }
 
 class MainPage extends StatefulWidget {
+  const MainPage({super.key});
+
   @override
-  _MainPageState createState() => _MainPageState();
+  MainPageState createState() => MainPageState();
 }
 
-class _MainPageState extends State<MainPage> {
+class MainPageState extends State<MainPage> {
   int _selectedIndex = 0;
 
   final List<Widget> _pages = [
-    HomePage(),
-    CategoriesPage(),
-    AddProductPage(), // Aqui você instancia a página, não chama um método
-    SearchPage(),
+    const HomePage(),
+    const CategoriesPage(),
+    const AddProductPage(), // Aqui você instancia a página, não chama um método
+    const SearchPage(),
   ];
 
   void _onItemTapped(int index) {
@@ -62,12 +64,12 @@ class _MainPageState extends State<MainPage> {
 }
 
 class AddProductPage extends StatelessWidget {
+  const AddProductPage({super.key});
+
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: Center(
-        child: Text('Add Product Page'),
-      ),
+    return const Center(
+      child: Text('Add Product Page'),
     );
   }
 }

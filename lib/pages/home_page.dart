@@ -5,12 +5,14 @@ import 'package:provider/provider.dart';
 import 'package:appsupermercado/services/product_service.dart';
 
 class HomePage extends StatelessWidget {
+  const HomePage({super.key});
+
   @override
   Widget build(BuildContext context) {
     final productService = Provider.of<ProductService>(context);
     return Scaffold(
       appBar: AppBar(
-        title: Text('Supermercado'),
+        title: const Text('Supermercado'),
       ),
       body: ListView.builder(
         itemCount: productService.products.length,
