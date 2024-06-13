@@ -12,10 +12,10 @@ class AddProductScreen extends StatefulWidget {
   AddProductScreen({required this.categoryId});
 
   @override
-  _AddProductScreenState createState() => _AddProductScreenState();
+  AddProductScreenState createState() => AddProductScreenState();
 }
 
-class _AddProductScreenState extends State<AddProductScreen> {
+class AddProductScreenState extends State<AddProductScreen> {
   final _formKey = GlobalKey<FormState>();
   final _nameController = TextEditingController();
   final _descriptionController = TextEditingController();

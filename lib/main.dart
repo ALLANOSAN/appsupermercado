@@ -30,7 +30,7 @@ class MyApp extends StatelessWidget {
             debugShowCheckedModeBanner: false,
             title: 'Supermercado',
             theme: ThemeData(
-              colorScheme: ColorScheme.fromSeed(seedColor: Colors.blue),
+            colorScheme: themeProvider.isDarkMode ? const ColorScheme.dark() : const ColorScheme.light(),
               useMaterial3: true,
               brightness: themeProvider.isDarkMode ? Brightness.dark : Brightness.light,
             ),
