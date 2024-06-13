@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'category_screen.dart';
-import 'add_category_screen.dart';
-import 'cart_screen.dart';
 import '../providers/category_provider.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -11,26 +9,6 @@ class HomeScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text('Supermercado'),
-        actions: [
-          IconButton(
-            icon: Icon(Icons.shopping_cart),
-            onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => CartScreen()),
-              );
-            },
-          ),
-          IconButton(
-            icon: Icon(Icons.add),
-            onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => AddCategoryScreen()),
-              );
-            },
-          ),
-        ],
       ),
       body: Consumer<CategoryProvider>(
         builder: (context, categoryProvider, child) {

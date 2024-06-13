@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'add_product_screen.dart';
@@ -79,7 +81,7 @@ class _CategoryScreenState extends State<CategoryScreen> {
                   itemCount: products.length,
                   itemBuilder: (context, index) {
                     return ListTile(
-                      leading: Image.network(products[index].imageUrl),
+                      leading: Image.file(File(products[index].imageUrl)),
                       title: Text(products[index].name),
                       subtitle: Text('R\$ ${products[index].price.toString()}'),
                       onTap: () {
