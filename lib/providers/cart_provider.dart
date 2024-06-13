@@ -1,32 +1,51 @@
 import 'package:flutter/material.dart';
-import '../models/product.dart';
-import '../utils/shared_prefs.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'dart:convert';
+import '../models/category.dart';
+import '../models/product.dart'; // Import your Product model
 
 class CartProvider with ChangeNotifier {
-  List<Product> _cartProducts = [];
-
-  List<Product> get cartProducts => _cartProducts;
-
-  double get totalPrice => _cartProducts.fold(0, (sum, item) => sum + item.price);
+  
+  List<Category> _categories = [];
+  final List<Product> _cart = []; // Add a cart list to hold Products
 
   CartProvider() {
-    _loadCart();
+    _loadCategories();
   }
 
-  void _loadCart() async {
-    _cartProducts = await SharedPrefs().getCartProducts();
+  List<Category> get categories => _categories;
+  List<Product> get cartProducts => _cart; // Getter for the cart list
+
+  double get totalPrice => _cart.fold(0, (sum, item) => sum + item.price); // Calculate total price
+
+  void addCategory(Category category) {
+    _categories.add(category);
+    _saveCategories();
     notifyListeners();
   }
 
-  void addToCart(Product product) async {
-    await SharedPrefs().addToCart(product);
-    _cartProducts.add(product);
+  void addToCart(Product product) { // Add a product to the cart
+    _cart.add(product);
     notifyListeners();
   }
 
-  void clearCart() async {
-    await SharedPrefs().clearCart();
-    _cartProducts.clear();
+  void clearCart() { // Clear the cart
+    _cart.clear();
+    notifyListeners();
+  }
+
+  void _saveCategories() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    List<String> categoriesJson = _categories.map((category) => json.encode(category.toJson())).toList();
+    await prefs.setStringList('categories', categoriesJson);
+  }
+
+  void _loadCategories() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    List<String>? categoriesJson = prefs.getStringList('categories');
+    if (categoriesJson != null) {
+      _categories = categoriesJson.map((jsonStr) => Category.fromJson(json.decode(jsonStr))).toList();
+    }
     notifyListeners();
   }
 }

@@ -10,13 +10,13 @@ import '../models/product.dart';
 class CategoryScreen extends StatefulWidget {
   final String categoryId;
 
-  CategoryScreen({required this.categoryId});
+  const CategoryScreen({super.key, required this.categoryId});
 
   @override
-  _CategoryScreenState createState() => _CategoryScreenState();
+  CategoryScreenState createState() => CategoryScreenState();
 }
 
-class _CategoryScreenState extends State<CategoryScreen> {
+class CategoryScreenState extends State<CategoryScreen> {
   String _query = '';
   bool _ascending = true;
 
@@ -24,10 +24,10 @@ class _CategoryScreenState extends State<CategoryScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Produtos'),
+        title: const Text('Produtos'),
         actions: [
           IconButton(
-            icon: Icon(Icons.add),
+            icon: const Icon(Icons.add),
             onPressed: () {
               Navigator.push(
                 context,

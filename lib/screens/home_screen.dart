@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'category_screen.dart';
 import '../providers/category_provider.dart';
+import 'dart:io';
 
 class HomeScreen extends StatelessWidget {
   @override
@@ -33,9 +34,19 @@ class HomeScreen extends StatelessWidget {
                 },
                 child: Card(
                   elevation: 5,
-                  child: Center(
-                    child: Text(categoryProvider.categories[index].name,
-                        style: TextStyle(fontSize: 18)),
+                  child: Column(
+                    children: [
+                      Expanded(
+                        child: _imageFileWidget(categoryProvider.categories[index].imageUrl),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Text(
+                          categoryProvider.categories[index].name,
+                          style: TextStyle(fontSize: 18),
+                        ),
+                      ),
+                    ],
                   ),
                 ),
               );
@@ -44,5 +55,17 @@ class HomeScreen extends StatelessWidget {
         },
       ),
     );
+  }
+
+  Widget _imageFileWidget(String imagePath) {
+    if (imagePath.isEmpty) {
+      return Container();
+    } else {
+      return Image.file(
+        File(imagePath),
+        fit: BoxFit.cover,
+        width: double.infinity,
+      );
+    }
   }
 }

@@ -18,7 +18,7 @@ class CategoryProvider with ChangeNotifier {
   }
 
   void addCategory(String name) async {
-    final newCategory = Category(id: Uuid().v4(), name: name);
+    final newCategory = Category(id: const Uuid().v4(), name: name, imageUrl: '');
     await SharedPrefs().addCategory(newCategory);
     _categories.add(newCategory);
     notifyListeners();

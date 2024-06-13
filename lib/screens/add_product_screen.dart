@@ -1,15 +1,17 @@
-import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-import 'package:image_picker/image_picker.dart';
 import 'dart:io';
+
+import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:provider/provider.dart';
+import 'package:uuid/uuid.dart';
+
 import '../models/product.dart';
 import '../providers/product_provider.dart';
-import 'package:uuid/uuid.dart';
 
 class AddProductScreen extends StatefulWidget {
   final String categoryId;
 
-  AddProductScreen({required this.categoryId});
+  const AddProductScreen({super.key, required this.categoryId});
 
   @override
   AddProductScreenState createState() => AddProductScreenState();
@@ -39,17 +41,17 @@ class AddProductScreenState extends State<AddProductScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Adicionar Produto'),
+        title: const Text('Adicionar Produto'),
       ),
       body: Padding(
-        padding: EdgeInsets.all(16.0),
+        padding: const EdgeInsets.all(16.0),
         child: Form(
           key: _formKey,
           child: ListView(
             children: [
               TextFormField(
                 controller: _nameController,
-                decoration: InputDecoration(labelText: 'Nome do Produto'),
+                decoration: const InputDecoration(labelText: 'Nome do Produto'),
                 validator: (value) {
                   if (value!.isEmpty) {
                     return 'Por favor, insira o nome do produto';
@@ -59,7 +61,8 @@ class AddProductScreenState extends State<AddProductScreen> {
               ),
               TextFormField(
                 controller: _descriptionController,
-                decoration: InputDecoration(labelText: 'Descrição do Produto'),
+                decoration:
+                    const InputDecoration(labelText: 'Descrição do Produto'),
                 validator: (value) {
                   if (value!.isEmpty) {
                     return 'Por favor, insira a descrição do produto';
@@ -69,7 +72,8 @@ class AddProductScreenState extends State<AddProductScreen> {
               ),
               TextFormField(
                 controller: _priceController,
-                decoration: InputDecoration(labelText: 'Preço do Produto'),
+                decoration:
+                    const InputDecoration(labelText: 'Preço do Produto'),
                 keyboardType: TextInputType.number,
                 validator: (value) {
                   if (value!.isEmpty) {
@@ -83,11 +87,11 @@ class AddProductScreenState extends State<AddProductScreen> {
                 children: [
                   ElevatedButton(
                     onPressed: () => _pickImage(ImageSource.camera),
-                    child: Text('Câmera'),
+                    child: const Text('Câmera'),
                   ),
                   ElevatedButton(
                     onPressed: () => _pickImage(ImageSource.gallery),
-                    child: Text('Galeria'),
+                    child: const Text('Galeria'),
                   ),
                 ],
               ),
@@ -97,12 +101,12 @@ class AddProductScreenState extends State<AddProductScreen> {
                       height: 200,
                     )
                   : Container(),
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
               ElevatedButton(
                 onPressed: () {
                   if (_formKey.currentState!.validate() && _imageFile != null) {
                     final newProduct = Product(
-                      id: Uuid().v4(),
+                      id: const Uuid().v4(),
                       categoryId: widget.categoryId,
                       name: _nameController.text,
                       description: _descriptionController.text,
@@ -110,10 +114,13 @@ class AddProductScreenState extends State<AddProductScreen> {
                       imageUrl: _imageFile!.path,
                     );
                     Provider.of<ProductProvider>(context, listen: false).addProduct(newProduct);
-                    Navigator.pop(context);
+                    if (Navigator.canPop(context)) {
+                      // Check if the navigator has any previous screens
+                      Navigator.pop(context);
+                    }
                   }
                 },
-                child: Text('Adicionar Produto'),
+                child: const Text('Adicionar Produto'),
               ),
             ],
           ),

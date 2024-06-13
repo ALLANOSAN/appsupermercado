@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:uuid/uuid.dart';
 import '../models/product.dart';
 import '../utils/shared_prefs.dart';
 
