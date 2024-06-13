@@ -32,6 +32,30 @@ class HomeScreen extends StatelessWidget {
                     ),
                   );
                 },
+                onLongPress: () {
+                  showDialog(
+                    context: context,
+                    builder: (ctx) => AlertDialog(
+                      title: Text('Remover categoria'),
+                      content: Text('Você tem certeza que deseja remover esta categoria?'),
+                      actions: <Widget>[
+                        TextButton(
+                          child: Text('Não'),
+                          onPressed: () {
+                            Navigator.of(ctx).pop();
+                          },
+                        ),
+                        TextButton(
+                          child: Text('Sim'),
+                          onPressed: () {
+                            categoryProvider.removeCategory(categoryProvider.categories[index].id);
+                            Navigator.of(ctx).pop();
+                          },
+                        ),
+                      ],
+                    ),
+                  );
+                },
                 child: Card(
                   elevation: 5,
                   child: Column(
@@ -43,7 +67,7 @@ class HomeScreen extends StatelessWidget {
                         padding: const EdgeInsets.all(8.0),
                         child: Text(
                           categoryProvider.categories[index].name,
-                          style: TextStyle(fontSize: 18),
+                          style: const TextStyle(fontSize: 18),
                         ),
                       ),
                     ],
