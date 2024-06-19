@@ -5,17 +5,19 @@ import '../providers/category_provider.dart';
 import 'dart:io';
 
 class HomeScreen extends StatelessWidget {
+  const HomeScreen({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Supermercado'),
+        title: const Text('Supermercado'),
       ),
       body: Consumer<CategoryProvider>(
         builder: (context, categoryProvider, child) {
           return GridView.builder(
-            padding: EdgeInsets.all(10.0),
-            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+            padding: const EdgeInsets.all(10.0),
+            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
               crossAxisCount: 2,
               crossAxisSpacing: 10,
               mainAxisSpacing: 10,
@@ -36,19 +38,19 @@ class HomeScreen extends StatelessWidget {
                   showDialog(
                     context: context,
                     builder: (ctx) => AlertDialog(
-                      title: Text('Remover categoria'),
-                      content: Text('Você tem certeza que deseja remover esta categoria?'),
+                      title: const Text('Remover categoria'),
+                      content: const Text('Você tem certeza que deseja remover esta categoria?'),
                       actions: <Widget>[
                         TextButton(
-                          child: Text('Não'),
+                          child: const Text('Não'),
                           onPressed: () {
                             Navigator.of(ctx).pop();
                           },
                         ),
                         TextButton(
-                          child: Text('Sim'),
+                          child: const Text('Sim'),
                           onPressed: () {
-                            categoryProvider.removeCategory(categoryProvider.categories[index].id);
+                            CategoryProvider.removeCategory(categoryProvider.categories[index].id);
                             Navigator.of(ctx).pop();
                           },
                         ),

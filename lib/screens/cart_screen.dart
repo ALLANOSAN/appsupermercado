@@ -3,11 +3,13 @@ import 'package:provider/provider.dart';
 import '../providers/cart_provider.dart';
 
 class CartScreen extends StatelessWidget {
+  const CartScreen({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Carrinho de Compras'),
+        title: const Text('Carrinho de Compras'),
       ),
       body: Consumer<CartProvider>(
         builder: (context, cartProvider, child) {
@@ -18,7 +20,7 @@ class CartScreen extends StatelessWidget {
                   itemCount: cartProvider.cartProducts.length,
                   itemBuilder: (context, index) {
                     return ListTile(
-                      leading: Image.network(cartProvider.cartProducts[index].imageUrl),
+                      leading: Image.network(cartProvider.cartProducts[index].image),
                       title: Text(cartProvider.cartProducts[index].name),
                       subtitle: Text('R\$ ${cartProvider.cartProducts[index].price.toString()}'),
                     );

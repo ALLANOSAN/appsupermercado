@@ -111,7 +111,7 @@ class AddProductScreenState extends State<AddProductScreen> {
                       name: _nameController.text,
                       description: _descriptionController.text,
                       price: double.parse(_priceController.text),
-                      imageUrl: _imageFile!.path,
+                      image: _imageFile!.path,
                     );
                     Provider.of<ProductProvider>(context, listen: false).addProduct(newProduct);
                     if (Navigator.canPop(context)) {

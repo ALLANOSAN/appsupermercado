@@ -44,7 +44,7 @@ class CategoryScreenState extends State<CategoryScreen> {
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: TextField(
-              decoration: InputDecoration(
+              decoration: const InputDecoration(
                 labelText: 'Pesquisar',
                 border: OutlineInputBorder(),
               ),
@@ -60,7 +60,7 @@ class CategoryScreenState extends State<CategoryScreen> {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text('Ordenar por preço'),
+                const Text('Ordenar por preço'),
                 Switch(
                   value: _ascending,
                   onChanged: (value) {
@@ -81,7 +81,7 @@ class CategoryScreenState extends State<CategoryScreen> {
                   itemCount: products.length,
                   itemBuilder: (context, index) {
                     return ListTile(
-                      leading: Image.file(File(products[index].imageUrl)),
+                      leading: Image.file(File(products[index].image)),
                       title: Text(products[index].name),
                       subtitle: Text('R\$ ${products[index].price.toString()}'),
                       onTap: () {

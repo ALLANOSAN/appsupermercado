@@ -6,20 +6,20 @@ import 'package:shared_preferences/shared_preferences.dart';
 import '../models/category.dart';
 import '../models/product.dart'; // Import your Product model
 
-class CartProvider with ChangeNotifier {
+class CategoryProvider with ChangeNotifier {
   Map<String, CartItem> _cartItems = {};
 
  
-  void removeItem(String id) {
-    _cartItems.remove(id);
-    _saveCartItems();
+  void removeCategory(String id) {
+    _categories.removeWhere((category) => category.id == id);
+    _saveCategories();
     notifyListeners();
-  }
+}
   
   List<Category> _categories = [];
   final List<Product> _cart = []; // Add a cart list to hold Products
 
-  CartProvider() {
+  CategoryProvider() {
     _loadCategories();
   }
 

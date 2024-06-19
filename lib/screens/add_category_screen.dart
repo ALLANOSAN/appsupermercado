@@ -75,7 +75,7 @@ class _AddCategoryScreenState extends State<AddCategoryScreen> {
                 onPressed: () {
                   if (_formKey.currentState!.validate() && _imageFile != null) {
                     final newCategory = Category(
-                      id: Uuid().v4(),
+                      id: const Uuid().v4(),
                       name: _nameController.text,
                       imageUrl: _imageFile!.path,
                     );
@@ -83,11 +83,11 @@ class _AddCategoryScreenState extends State<AddCategoryScreen> {
                     Navigator.pop(context);
                   } else if (_imageFile == null) {
                     ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(content: Text('Por favor, adicione uma imagem da categoria.')),
+                      const SnackBar(content: Text('Por favor, adicione uma imagem da categoria.')),
                     );
                   }
                 },
-                child: Text('Adicionar Categoria'),
+                child: const Text('Adicionar Categoria'),
               ),
             ],
           ),
