@@ -1,8 +1,7 @@
+import 'package:appsupermercado/providers/cart_provider.dart';
 import 'package:appsupermercado/screens/main_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-
-import 'providers/cart_provider.dart';
 import 'providers/category_provider.dart';
 import 'providers/product_provider.dart';
 import 'providers/theme_provider.dart';

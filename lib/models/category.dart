@@ -1,15 +1,15 @@
 class Category {
   final String id;
   final String name;
-  final String imageUrl;
+  final String image;
 
-  Category({required this.id, required this.name, required this.imageUrl});
+  Category({required this.id, required this.name, required this.image});
 
   Map<String, dynamic> toJson() {
     return {
       'id': id,
       'name': name,
-      'imageUrl': imageUrl,
+      'imageUrl': image,
     };
   }
 
@@ -17,7 +17,7 @@ class Category {
     return Category(
       id: json['id'],
       name: json['name'],
-      imageUrl: json['imageUrl'],
+      image: json['imageUrl'],
     );
   }
 }

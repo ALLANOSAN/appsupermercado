@@ -1,25 +1,15 @@
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
+import 'dart:convert';
 import '../models/category.dart';
 import '../models/product.dart'; // Import your Product model
 
-class CategoryProvider with ChangeNotifier {
-  Map<String, CartItem> _cartItems = {};
-
- 
-  void removeCategory(String id) {
-    _categories.removeWhere((category) => category.id == id);
-    _saveCategories();
-    notifyListeners();
-}
+class CartProvider with ChangeNotifier {
   
   List<Category> _categories = [];
   final List<Product> _cart = []; // Add a cart list to hold Products
 
-  CategoryProvider() {
+  CartProvider() {
     _loadCategories();
   }
 

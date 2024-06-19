@@ -3,7 +3,6 @@ import 'package:provider/provider.dart';
 import 'category_screen.dart';
 import '../providers/category_provider.dart';
 import 'dart:io';
-
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
 
@@ -35,11 +34,14 @@ class HomeScreen extends StatelessWidget {
                   );
                 },
                 onLongPress: () {
+                  var categoryProvider =
+                      Provider.of<CategoryProvider>(context, listen: false);
                   showDialog(
                     context: context,
                     builder: (ctx) => AlertDialog(
                       title: const Text('Remover categoria'),
-                      content: const Text('Você tem certeza que deseja remover esta categoria?'),
+                      content: const Text(
+                          'Você tem certeza que deseja remover esta categoria?'),
                       actions: <Widget>[
                         TextButton(
                           child: const Text('Não'),
@@ -50,7 +52,8 @@ class HomeScreen extends StatelessWidget {
                         TextButton(
                           child: const Text('Sim'),
                           onPressed: () {
-                            CategoryProvider.removeCategory(categoryProvider.categories[index].id);
+                            categoryProvider.removeCategory(
+                                categoryProvider.categories[index].id);
                             Navigator.of(ctx).pop();
                           },
                         ),
@@ -63,7 +66,8 @@ class HomeScreen extends StatelessWidget {
                   child: Column(
                     children: [
                       Expanded(
-                        child: _imageFileWidget(categoryProvider.categories[index].imageUrl),
+                        child: _imageFileWidget(
+                            categoryProvider.categories[index].image),
                       ),
                       Padding(
                         padding: const EdgeInsets.all(8.0),

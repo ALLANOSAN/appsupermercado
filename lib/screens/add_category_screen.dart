@@ -7,11 +7,13 @@ import '../models/category.dart';
 import 'package:uuid/uuid.dart';
 
 class AddCategoryScreen extends StatefulWidget {
+  const AddCategoryScreen({super.key});
+
   @override
-  _AddCategoryScreenState createState() => _AddCategoryScreenState();
+  AddCategoryScreenState createState() => AddCategoryScreenState();
 }
 
-class _AddCategoryScreenState extends State<AddCategoryScreen> {
+class AddCategoryScreenState extends State<AddCategoryScreen> {
   final _formKey = GlobalKey<FormState>();
   final _nameController = TextEditingController();
   File? _imageFile;
@@ -33,17 +35,17 @@ class _AddCategoryScreenState extends State<AddCategoryScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Adicionar Categoria'),
+        title: const Text('Adicionar Categoria'),
       ),
       body: Padding(
-        padding: EdgeInsets.all(16.0),
+        padding: const EdgeInsets.all(16.0),
         child: Form(
           key: _formKey,
           child: ListView(
             children: [
               TextFormField(
                 controller: _nameController,
-                decoration: InputDecoration(labelText: 'Nome da Categoria'),
+                decoration: const InputDecoration(labelText: 'Nome da Categoria'),
                 validator: (value) {
                   if (value!.isEmpty) {
                     return 'Por favor, insira o nome da categoria';
@@ -56,11 +58,11 @@ class _AddCategoryScreenState extends State<AddCategoryScreen> {
                 children: [
                   ElevatedButton(
                     onPressed: () => _pickImage(ImageSource.camera),
-                    child: Text('Câmera'),
+                    child: const Text('Câmera'),
                   ),
                   ElevatedButton(
                     onPressed: () => _pickImage(ImageSource.gallery),
-                    child: Text('Galeria'),
+                    child: const Text('Galeria'),
                   ),
                 ],
               ),
@@ -70,14 +72,14 @@ class _AddCategoryScreenState extends State<AddCategoryScreen> {
                       height: 200,
                     )
                   : Container(),
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
               ElevatedButton(
                 onPressed: () {
                   if (_formKey.currentState!.validate() && _imageFile != null) {
                     final newCategory = Category(
                       id: const Uuid().v4(),
                       name: _nameController.text,
-                      imageUrl: _imageFile!.path,
+                      image: _imageFile!.path,
                     );
                     Provider.of<CategoryProvider>(context, listen: false).addCategory(newCategory as String);
                     Navigator.pop(context);

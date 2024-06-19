@@ -17,9 +17,9 @@ class MainScreenState extends State<MainScreen> {
   int _selectedIndex = 0;
 
   static final List<Widget> _pages = <Widget>[
-    HomeScreen(),
-    AddCategoryScreen(),
-    CartScreen(),
+    const HomeScreen(),
+    const AddCategoryScreen(),
+    const CartScreen(),
   ];
 
   void _onItemTapped(int index) {

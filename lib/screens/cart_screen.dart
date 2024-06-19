@@ -31,16 +31,16 @@ class CartScreen extends StatelessWidget {
                 padding: const EdgeInsets.all(16.0),
                 child: Column(
                   children: [
-                    Text('Total: R\$ ${cartProvider.totalPrice}', style: TextStyle(fontSize: 20)),
-                    SizedBox(height: 10),
+                    Text('Total: R\$ ${cartProvider.totalPrice}', style: const TextStyle(fontSize: 20)),
+                    const SizedBox(height: 10),
                     ElevatedButton(
                       onPressed: () {
                         cartProvider.clearCart();
                         ScaffoldMessenger.of(context).showSnackBar(
-                          SnackBar(content: Text('Compra finalizada!')),
+                          const SnackBar(content: Text('Compra finalizada!')),
                         );
                       },
-                      child: Text('Finalizar Compra'),
+                      child: const Text('Finalizar Compra'),
                     ),
                   ],
                 ),

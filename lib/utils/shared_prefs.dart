@@ -18,6 +18,13 @@ class SharedPrefs {
     prefs.setString('categories', json.encode(categories));
   }
 
+  Future<void> removeCategory(String id) async {
+    final prefs = await SharedPreferences.getInstance();
+    final categories = await getCategories();
+    categories.removeWhere((category) => category.id == id);
+    prefs.setString('categories', json.encode(categories.map((category) => category.toJson()).toList()));
+  }
+
   Future<List<Product>> getProducts() async {
     final prefs = await SharedPreferences.getInstance();
     final productsData = prefs.getString('products') ?? '[]';

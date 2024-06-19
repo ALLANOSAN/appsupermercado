@@ -5,9 +5,13 @@ import 'package:provider/provider.dart';
 
 class ProductScreen extends StatelessWidget {
   final Product product;
+  final String? image;
+  final String? description;
 
   // Add a key parameter to your constructor
-  const ProductScreen({Key? key, required this.product}) : super(key: key);
+  const ProductScreen(
+      {Key? key, required this.product, this.image, this.description})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -19,7 +23,7 @@ class ProductScreen extends StatelessWidget {
         padding: const EdgeInsets.all(16.0),
         child: Column(
           children: [
-            Image.network(product.imageUrl),
+            Image.network(product.image),
             const SizedBox(height: 10),
             Text('R\$ ${product.price}', style: const TextStyle(fontSize: 24)),
             const SizedBox(height: 10),
@@ -27,9 +31,11 @@ class ProductScreen extends StatelessWidget {
             const SizedBox(height: 10),
             ElevatedButton(
               onPressed: () {
-                Provider.of<CartProvider>(context, listen: false).addToCart(product);
+                Provider.of<CartProvider>(context, listen: false)
+                    .addToCart(product);
                 ScaffoldMessenger.of(context).showSnackBar(
-                  const SnackBar(content: Text('Produto adicionado ao carrinho')),
+                  const SnackBar(
+                      content: Text('Produto adicionado ao carrinho')),
                 );
               },
               child: const Text('Adicionar ao Carrinho'),
