@@ -25,7 +25,7 @@ class CategoryProvider with ChangeNotifier {
     notifyListeners();
   }
 
-  void removeCategory(String id) async {
+  void removeCategory(String id, void pop) async {
     _categories.removeWhere((category) => category.id == id);
     await SharedPrefs().removeCategory(id);
     notifyListeners();

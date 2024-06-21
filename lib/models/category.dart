@@ -1,7 +1,7 @@
 class Category {
-  final String id;
-  final String name;
-  final String image;
+  final String? id;
+  final String? name;
+  final String? image;
 
   Category({required this.id, required this.name, required this.image});
 
@@ -9,7 +9,7 @@ class Category {
     return {
       'id': id,
       'name': name,
-      'imageUrl': image,
+      'image': image,
     };
   }
 
@@ -17,7 +17,7 @@ class Category {
     return Category(
       id: json['id'],
       name: json['name'],
-      image: json['imageUrl'],
+      image: json['image'],
     );
   }
 }

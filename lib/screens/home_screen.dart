@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import 'category_screen.dart';
 import '../providers/category_provider.dart';
 import 'dart:io';
+
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
 
@@ -23,25 +24,24 @@ class HomeScreen extends StatelessWidget {
             ),
             itemCount: categoryProvider.categories.length,
             itemBuilder: (context, index) {
+              final category = categoryProvider.categories[index];
               return GestureDetector(
                 onTap: () {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
                       builder: (context) => CategoryScreen(
-                          categoryId: categoryProvider.categories[index].id),
+                        categoryId: category.id ?? '', // Ensure non-nullable String
+                      ),
                     ),
                   );
                 },
                 onLongPress: () {
-                  var categoryProvider =
-                      Provider.of<CategoryProvider>(context, listen: false);
                   showDialog(
                     context: context,
                     builder: (ctx) => AlertDialog(
                       title: const Text('Remover categoria'),
-                      content: const Text(
-                          'Você tem certeza que deseja remover esta categoria?'),
+                      content: const Text('Você tem certeza que deseja remover esta categoria?'),
                       actions: <Widget>[
                         TextButton(
                           child: const Text('Não'),
@@ -52,8 +52,10 @@ class HomeScreen extends StatelessWidget {
                         TextButton(
                           child: const Text('Sim'),
                           onPressed: () {
-                            categoryProvider.removeCategory(
-                                categoryProvider.categories[index].id);
+                            Provider.of<CategoryProvider>(context, listen: false).removeCategory(
+                              category.id ?? '',
+                              category.image ?? 'default_image_path', // Ensure non-nullable String
+                            );
                             Navigator.of(ctx).pop();
                           },
                         ),
@@ -66,13 +68,12 @@ class HomeScreen extends StatelessWidget {
                   child: Column(
                     children: [
                       Expanded(
-                        child: _imageFileWidget(
-                            categoryProvider.categories[index].image),
+                        child: _imageFileWidget(category.image),
                       ),
                       Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: Text(
-                          categoryProvider.categories[index].name,
+                          category.name!,
                           style: const TextStyle(fontSize: 18),
                         ),
                       ),
@@ -87,8 +88,8 @@ class HomeScreen extends StatelessWidget {
     );
   }
 
-  Widget _imageFileWidget(String imagePath) {
-    if (imagePath.isEmpty) {
+  Widget _imageFileWidget(String? imagePath) {
+    if (imagePath == null || imagePath.isEmpty) {
       return Container();
     } else {
       return Image.file(
